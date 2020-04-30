@@ -12,6 +12,7 @@ using CleanArcMvc.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using CleanArch.Infra.Data.Context;
 
 namespace CleanArcMvc
 {
@@ -34,6 +35,10 @@ namespace CleanArcMvc
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddDbContext<UniversityDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("UniversityDbConnection"));
+            }); 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
